@@ -1,0 +1,9 @@
+[
+  {
+    "objectID": "candidates.html",
+    "href": "candidates.html",
+    "title": "Life Expectancy for Political Candidates",
+    "section": "",
+    "text": "Warning: package 'tidyr' was built under R version 4.5.1\n\n\nWarning: package 'dplyr' was built under R version 4.5.1\n\n\n\n\n\n\n\n\n\n\n\nWe model the number of years a political candidate lives after an election as a linear function of their sex, age at the time of the election, and the interaction between those two variables. This structure allows us to estimate how age and gender together relate to longevity, assuming normally distributed variation around the predicted values.\n\n\n\n\n\n\n\n\nFitted Model for Candidate Longevity\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n47.4309358\n19.7936113\n2.3962750\n0.01661377\n8.623024\n86.2388472\n\n\nsexMale\n11.0457343\n19.8131827\n0.5574942\n0.57722475\n-27.800549\n49.8920181\n\n\nelection_age\n-0.4924265\n0.3413932\n-1.4424028\n0.14927643\n-1.161772\n0.1769186\n\n\nsexMale:election_age\n-0.1894344\n0.3418045\n-0.5542184\n0.57946404\n-0.859586\n0.4807172\n\n\n\nData Source: US Governors since 1945\n\n\n\n\n\n\n\n\n\\[\n\\widehat{\\text{lived\\_after}} = 19.3 + 53.3 \\cdot \\text{sex}_{\\text{Male}} - 0.0563 \\cdot \\text{election\\_age} - 0.800 \\cdot \\left(\\text{sex}_{\\text{Male}} \\times \\text{election\\_age} \\right)\n\\]"
+  }
+]
