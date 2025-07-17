@@ -1,0 +1,54 @@
+---
+title: "Life Expectancy for Political Candidates"
+author: "Ryan"
+format: html
+execute: 
+  echo: false
+---
+
+```{r setup}
+#| message: false
+library(tidyverse)
+library(primer.data)
+library(tidymodels)
+library(broom)
+library(marginaleffects)
+
+```
+
+```{r}
+#| cache: true
+fit_years <- linear_reg(engine = "lm") |>
+  fit(lived_after ~ sex + election_age + sex*election_age, data = governors)
+```
+
+$$
+\widehat{\text{lived\_after}} = 19.3 + 53.3 \cdot \text{sex}_{\text{Male}} - 0.0563 \cdot \text{election\_age} - 0.800 \cdot \left(\text{sex}_{\text{Male}} \times \text{election\_age} \right)
+$$
+
+
+```{r}
+library(gt)
+
+tidy(fit_years, conf.int = TRUE) |>
+  gt() |>
+  tab_header(title = "Fitted Model for Candidate Longevity") |>
+  tab_source_note(source_note = "Data Source: US Governors since 1945")
+
+```
+
+
+
+
+```{r}
+plot_predictions(fit_years, 
+                 by = c("election_age", "sex")) +
+  labs(title = "Years Lived After Election by Age and Sex",
+       subtitle = "Male candidates are expected to live longer, especially at younger election ages",
+       caption = "Data: US Political Candidates Dataset",
+       x = "Election Age",
+       y = "Years Lived After Election")
+
+```
+
+We model the number of years a political candidate lives after an election as a linear function of their sex, age at the time of the election, and the interaction between those two variables. This structure allows us to estimate how age and gender together relate to longevity, assuming normally distributed variation around the predicted values.
